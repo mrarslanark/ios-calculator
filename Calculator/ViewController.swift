@@ -31,7 +31,7 @@ class ViewController: UIViewController {
             return
         }
         
-        /*
+        /**
          * Storing captured number temporarily until any
          * arithmetic operator is pressed
          */
@@ -60,6 +60,29 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didPressEquals(_ sender: Any) {
+        // Converting to int; using guard to capture any issues
+        guard let labelInt: Int = Int(labelString) else {
+            label.text = "Error"
+            return
+        }
+        /**
+         * Checking if user didn't pressed equal after pressing
+         * an arithmetic operation
+         */
+        if currentMode == .notSet || lastButtonWasMode {
+            return
+        }
+        
+        if currentMode == .addition {
+            savedNum += labelInt
+        } else if currentMode == .subtraction {
+            savedNum -= labelInt
+        }
+        
+        currentMode = .notSet
+        labelString = "\(savedNum)"
+        updateText()
+        lastButtonWasMode = true
         
     }
     
