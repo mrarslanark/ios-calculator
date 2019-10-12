@@ -8,13 +8,27 @@
 
 import UIKit
 
+enum modes {
+    case notSet
+    case addition
+    case subtraction
+    case multiplication
+}
+
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    
+    var labelString: String = "0"
+    var currentMode: modes = .notSet
+    var savedNum: Int = 0
+    var lastButtonWasMode: Bool = false
+    
+    func updateText() {
+        
     }
-
+    
+    func changeModes(newMode: modes) {
+        
+    }
 
 }
 
