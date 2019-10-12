@@ -31,19 +31,32 @@ class ViewController: UIViewController {
             return
         }
         
+        /*
+         * Storing captured number temporarily until any
+         * arithmetic operator is pressed
+         */
+        if currentMode == .notSet {
+            savedNum = labelInt
+        }
+        
         label.text = "\(labelInt)"
     }
     
     func changeModes(newMode: modes) {
+        if savedNum == 0 {
+            return
+        }
         
+        currentMode = newMode
+        lastButtonWasMode = true
     }
 
     @IBAction func didPressPlus(_ sender: Any) {
-        
+        changeModes(newMode: .addition)
     }
     
     @IBAction func didPressMinus(_ sender: Any) {
-        
+        changeModes(newMode: .subtraction)
     }
     
     @IBAction func didPressEquals(_ sender: Any) {
@@ -62,6 +75,11 @@ class ViewController: UIViewController {
         guard let stringValue: String = sender.titleLabel?.text else {
             label.text = "Error"
             return
+        }
+        
+        if lastButtonWasMode {
+            lastButtonWasMode = false
+            labelString = "0"
         }
         
         labelString = labelString.appending(stringValue)
